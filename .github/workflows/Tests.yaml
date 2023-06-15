@@ -12,6 +12,7 @@ jobs:
       matrix:
         os: [ubuntu-22.04]
         python: ["3.8", "3.9", "3.10", "3.11"]
+        max-parallel: 4
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -24,7 +25,9 @@ jobs:
           architecture: x64
 
       - name: Install dependencies (and project)
-        run: pip install -e .[tests,scripts]
+        run: |
+          pip install -U pip
+          pip install -e .[tests,scripts]
 
       - name: Run the tests
         run: inv cov --args "-vvv"
