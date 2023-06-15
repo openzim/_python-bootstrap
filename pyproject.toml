@@ -50,6 +50,11 @@ great-binary = "great_project:entrypoint"
 [tool.hatch.version]
 path = "src/great_project/__about__.py"
 
+[tool.hatch.build]
+exclude = [
+  "/.github",
+]
+
 [tool.hatch.envs.test]
 features = ["scripts", "test"]
 
