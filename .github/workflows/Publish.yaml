@@ -6,7 +6,7 @@ on:
       - published
 
 jobs:
-  check-qa:
+  publish:
     runs-on: ubuntu-22.04
 
     steps:
@@ -25,7 +25,7 @@ jobs:
 
        - name: Upload to PyPI
          uses: pypa/gh-action-pypi-publish@v1.8.6
-         with:
+         # with:
           # dont specify anything for Trusted Publishing
           # https://docs.pypi.org/trusted-publishers
           #
