@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies (and project)
         run: |
           pip install -U pip
-          pip install -e .[tests,scripts]
+          pip install -e .[test,scripts]
 
       - name: Run the tests
         run: inv cov --args "-vvv"
