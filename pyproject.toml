@@ -35,6 +35,7 @@ test = [
   "coverage==7.2.7",
 ]
 dev = [
+  "pre-commit==3.3.3",
   "great-project[scripts]",
   "great-project[lint]",
   "great-project[test]",
@@ -58,6 +59,9 @@ exclude = [
 [tool.hatch.envs.test]
 features = ["scripts", "test"]
 
+[[tool.hatch.envs.test.matrix]]
+python = ["3.10", "3.11"]
+
 [tool.hatch.envs.test.scripts]
 test = "inv test --args '{args}'"
 test-cov = "inv test-cov --args '{args}'"
@@ -70,7 +74,9 @@ skip-install = false
 features = ["lint"]
 
 [tool.hatch.envs.lint.scripts]
-lint = "inv lint --args '{args}'"
+lint-black = "inv lint-black --args '{args}'"
+lint-ruff = "inv lint-ruff --args '{args}'"
+lintall = "inv lintall --args '{args}'"
 fix-black = "inv fix-black --args '{args}'"
 fix-ruff = "inv fix-ruff --args '{args}'"
 fixall = "inv fixall --args '{args}'"
