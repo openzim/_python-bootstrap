@@ -63,10 +63,10 @@ features = ["scripts", "test"]
 python = ["3.10", "3.11"]
 
 [tool.hatch.envs.test.scripts]
-test = "inv test --args '{args}'"
-test-cov = "inv test-cov --args '{args}'"
-cov-report = "inv cov-report"
-cov = "inv cov --args '{args}'"
+run = "inv test --args '{args}'"
+run-cov = "inv test-cov --args '{args}'"
+report-cov = "inv report-cov"
+coverage = "inv coverage --args '{args}'"
 
 [tool.hatch.envs.lint]
 template = "lint"
@@ -74,12 +74,19 @@ skip-install = false
 features = ["lint"]
 
 [tool.hatch.envs.lint.scripts]
-lint-black = "inv lint-black --args '{args}'"
-lint-ruff = "inv lint-ruff --args '{args}'"
-lintall = "inv lintall --args '{args}'"
+black = "inv lint-black --args '{args}'"
+ruff = "inv lint-ruff --args '{args}'"
+all = "inv lintall --args '{args}'"
 fix-black = "inv fix-black --args '{args}'"
 fix-ruff = "inv fix-ruff --args '{args}'"
 fixall = "inv fixall --args '{args}'"
+
+[tool.hatch.envs.check]
+features = ["scripts", "test"]
+
+[tool.hatch.envs.check.scripts]
+pyright = "inv check-pyright --args '{args}'"
+all = "inv checkall --args '{args}'"
 
 [tool.black]
 line-length = 88
@@ -194,3 +201,10 @@ exclude_lines = [
   "if __name__ == .__main__.:",
   "if TYPE_CHECKING:",
 ]
+
+[tool.pyright]
+include = ["src", "tests", "tasks.py"]
+exclude = [".env/**", ".venv/**"]
+extraPaths = ["src"]
+pythonVersion = "3.11"
+typeCheckingMode="strict"

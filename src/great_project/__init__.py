@@ -1,7 +1,12 @@
+# pyright: strict, reportUnnecessaryIsInstance=false
+
 from great_project.__about__ import __version__
 
 
 def compute(a: int, b: int) -> int:
+    if not isinstance(a, int) or not isinstance(b, int):
+        msg = "int only"
+        raise TypeError(msg)
     return a + b
 
 
