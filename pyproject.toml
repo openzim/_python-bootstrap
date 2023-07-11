@@ -71,7 +71,7 @@ coverage = "inv coverage --args '{args}'"
 [tool.hatch.envs.lint]
 template = "lint"
 skip-install = false
-features = ["lint"]
+features = ["scripts", "lint"]
 
 [tool.hatch.envs.lint.scripts]
 black = "inv lint-black --args '{args}'"
