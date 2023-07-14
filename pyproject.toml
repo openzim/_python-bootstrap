@@ -30,6 +30,9 @@ lint = [
   "black==23.3.0",
   "ruff==0.0.272",
 ]
+check = [
+  "pyright==1.1.317",
+]
 test = [
   "pytest==7.3.1",
   "coverage==7.2.7",
@@ -39,6 +42,7 @@ dev = [
   "great-project[scripts]",
   "great-project[lint]",
   "great-project[test]",
+  "great-project[check]",
 ]
 
 [project.urls]
@@ -82,7 +86,7 @@ fix-ruff = "inv fix-ruff --args '{args}'"
 fixall = "inv fixall --args '{args}'"
 
 [tool.hatch.envs.check]
-features = ["scripts", "test"]
+features = ["scripts", "check"]
 
 [tool.hatch.envs.check.scripts]
 pyright = "inv check-pyright --args '{args}'"
