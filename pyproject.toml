@@ -60,6 +60,9 @@ exclude = [
   "/.github",
 ]
 
+[tool.hatch.envs.default]
+features = ["dev"]
+
 [tool.hatch.envs.test]
 features = ["scripts", "test"]
 
