@@ -21,8 +21,8 @@ jobs:
 
       - name: Build packages
         run: |
-          pip install -U pip build
-          python -m build sdist wheel
+          pip install -U pip hatch
+          hatch build
 
       - name: Upload to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1.8
@@ -36,3 +36,18 @@ jobs:
         #  # Using token on test index
         #  password: ${{ secrets.PYPI_TEST_API_TOKEN }}
         #  repository_url: https://test.pypi.org/legacy/
+
+      - name: Build and push Docker image
+        uses: openzim/docker-publish-action@v10
+        with:
+          image-name: openzim/great_project
+          on-master: dev
+          tag-pattern: /^v([0-9.]+)$/
+          latest-on-tag: true
+          restrict-to: openzim/great_project
+          registries: ghcr.io
+          credentials:
+            GHCRIO_USERNAME=${{ secrets.GHCR_USERNAME }}
+            GHCRIO_TOKEN=${{ secrets.GHCR_TOKEN }}
+          repo_description: auto
+          repo_overview: auto
