@@ -164,10 +164,14 @@ select = [
 ignore = [
   # Allow non-abstract empty methods in abstract base classes
   "B027",
+  # Remove flake8-errmsg since we consider they bloat the code and provide limited value
+  "EM",
   # Allow boolean positional values in function calls, like `dict.get(... True)`
   "FBT003",
   # Ignore checks for possible passwords
   "S105", "S106", "S107",
+  # Ignore warnings on subprocess.run / popen
+  "S603",
   # Ignore complexity
   "C901", "PLR0911", "PLR0912", "PLR0913", "PLR0915",
 ]
@@ -178,6 +182,10 @@ unfixable = [
 
 [tool.ruff.isort]
 known-first-party = ["great_project"]
+
+[tool.ruff.flake8-bugbear]
+# add exceptions to B008 for fastapi.
+extend-immutable-calls = ["fastapi.Depends", "fastapi.Query"]
 
 [tool.ruff.flake8-tidy-imports]
 ban-relative-imports = "all"
