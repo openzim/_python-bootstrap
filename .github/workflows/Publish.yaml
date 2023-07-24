@@ -21,8 +21,8 @@ jobs:
 
       - name: Build packages
         run: |
-          pip install -U pip hatch
-          hatch build
+          pip install -U pip build
+          python -m build sdist wheel
 
       - name: Upload to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1.8
@@ -40,11 +40,10 @@ jobs:
       - name: Build and push Docker image
         uses: openzim/docker-publish-action@v10
         with:
-          image-name: openzim/great_project
-          on-master: dev
+          image-name: openzim/great-project
           tag-pattern: /^v([0-9.]+)$/
           latest-on-tag: true
-          restrict-to: openzim/great_project
+          restrict-to: openzim/_python-bootstrap
           registries: ghcr.io
           credentials:
             GHCRIO_USERNAME=${{ secrets.GHCR_USERNAME }}
