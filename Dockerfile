@@ -15,7 +15,7 @@ COPY src /src/src
 COPY pyproject.toml install.sh *.md /src/
 
 # Install + cleanup
-RUN pip install /src \
+RUN pip install --no-cache-dir /src \
  && rm -rf /src
 
 CMD ["great-binary", "--help"]
