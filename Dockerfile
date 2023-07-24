@@ -4,11 +4,11 @@ LABEL org.opencontainers.image.source https://github.com/openzim/_python-bootstr
 # Install necessary packages
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
-    # locales required if tool has any i18n support
-    locales-all \
+      # locales required if tool has any i18n support
+      locales-all \
  && rm -rf /var/lib/apt/lists/* \
  && python -m pip install --no-cache-dir -U \
-    pip
+      pip
 
 # Copy code + associated artifacts
 COPY src /src/src
