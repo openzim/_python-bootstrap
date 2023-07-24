@@ -12,7 +12,7 @@ RUN apt-get update \
 
 # Copy code + associated artifacts
 COPY src /src/src
-COPY pyproject.toml install.sh *.md /src/
+COPY pyproject.toml *.md /src/
 
 # Install + cleanup
 RUN pip install --no-cache-dir /src \
