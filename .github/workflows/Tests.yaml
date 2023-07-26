@@ -60,8 +60,8 @@ jobs:
 
       - name: Ensure we can build the Docker image
         run: |
-          docker build -t ghcr.io/library/testimage .
+          docker build -t testimage .
 
       - name: Ensure we can start the Docker image
         run: |
-          docker run --rm ghcr.io/library/testimage
+          docker run --rm testimage

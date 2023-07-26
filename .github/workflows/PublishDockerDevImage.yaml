@@ -16,8 +16,7 @@ jobs:
         uses: openzim/docker-publish-action@v10
         with:
           image-name: openzim/great-project
-          on-master: dev
-          tag-pattern: /^v([0-9.]+)$/
+          manual-tag: dev
           latest-on-tag: false
           restrict-to: openzim/_python-bootstrap
           registries: ghcr.io
