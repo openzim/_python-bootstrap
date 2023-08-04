@@ -39,7 +39,7 @@ test = [
 ]
 dev = [
   "pre-commit==3.3.3",
-  "debugpy==1.6.8",
+  "debugpy==1.6.7",
   "great-project[scripts]",
   "great-project[lint]",
   "great-project[test]",
