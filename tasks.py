@@ -16,21 +16,29 @@ def test(ctx: Context, args: str | None = ""):
 @task(optional=["args"], help={"args": "pytest additional arguments"})
 def test_cov(ctx: Context, args: str | None = ""):
     """run test vith coverage"""
-    ctx.run(f"coverage run -m pytest {args}", pty=use_pty)
+    ctx.run(f"pytest --cov=src {args}", pty=use_pty)
 
 
-@task()
-def report_cov(ctx: Context):
+@task(optional=["no-html"], help={"no-html": "flag to not export html report"})
+def report_cov(ctx: Context, *, no_html: bool = False):
     """report coverage"""
     ctx.run("coverage combine", warn=True, pty=use_pty)
     ctx.run("coverage report --show-missing", pty=use_pty)
+    if not no_html:
+        ctx.run("coverage html", pty=use_pty)
 
 
-@task(optional=["args"], help={"args": "pytest additional arguments"})
-def coverage(ctx: Context, args: str | None = ""):
+@task(
+    optional=["args", "no-html"],
+    help={
+        "args": "pytest additional arguments",
+        "no-html": "flag to not export html report",
+    },
+)
+def coverage(ctx: Context, args: str = "", *, no_html: bool = False):
     """run tests and report coverage"""
-    test_cov(ctx, args)
-    report_cov(ctx)
+    test_cov(ctx, args=args + " --cov-report xml")
+    report_cov(ctx, no_html=no_html)
 
 
 @task(
