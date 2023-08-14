@@ -8,13 +8,13 @@ use_pty = not os.getenv("CI", "")
 
 
 @task(optional=["args"], help={"args": "pytest additional arguments"})
-def test(ctx: Context, args: str | None = ""):
+def test(ctx: Context, args: str = ""):
     """run tests (without coverage)"""
     ctx.run(f"pytest {args}", pty=use_pty)
 
 
 @task(optional=["args"], help={"args": "pytest additional arguments"})
-def test_cov(ctx: Context, args: str | None = ""):
+def test_cov(ctx: Context, args: str = ""):
     """run test vith coverage"""
     ctx.run(f"pytest --cov=src {args}", pty=use_pty)
 
@@ -44,8 +44,7 @@ def coverage(ctx: Context, args: str = "", *, no_html: bool = False):
 @task(
     optional=["args"], help={"args": "linting tools (black, ruff) additional arguments"}
 )
-def lint_black(ctx: Context, args: str | None = ""):
-    args = args or "."
+def lint_black(ctx: Context, args: str = "."):
     ctx.run("black --version", pty=use_pty)
     ctx.run(f"black --check --diff {args}", pty=use_pty)
 
@@ -53,58 +52,58 @@ def lint_black(ctx: Context, args: str | None = ""):
 @task(
     optional=["args"], help={"args": "linting tools (black, ruff) additional arguments"}
 )
-def lint_ruff(ctx: Context, args: str | None = ""):
-    args = args or "."
+def lint_ruff(ctx: Context, args: str = "."):
     ctx.run("ruff --version", pty=use_pty)
     ctx.run(f"ruff check {args}", pty=use_pty)
 
 
 @task(
-    optional=["args"], help={"args": "linting tools (black, ruff) additional arguments"}
+    optional=["black_args", "ruff_args"],
+    help={
+        "black_args": "linting (fix mode) black arguments",
+        "ruff_args": "linting (fix mode) ruff arguments",
+    },
 )
-def lintall(ctx: Context, args: str | None = ""):
-    """check linting"""
-    args = args or "."
-    lint_black(ctx, args)
-    lint_ruff(ctx, args)
+def lintall(ctx: Context, black_args: str = ".", ruff_args: str = "."):
+    """Check linting"""
+    lint_black(ctx, black_args)
+    lint_ruff(ctx, ruff_args)
 
 
 @task(optional=["args"], help={"args": "check tools (pyright) additional arguments"})
-def check_pyright(ctx: Context, args: str | None = ""):
+def check_pyright(ctx: Context, args: str = ""):
     """check static types with pyright"""
-    args = args or ""
     ctx.run("pyright --version")
     ctx.run(f"pyright {args}", pty=use_pty)
 
 
 @task(optional=["args"], help={"args": "check tools (pyright) additional arguments"})
-def checkall(ctx: Context, args: str | None = ""):
+def checkall(ctx: Context, args: str = ""):
     """check static types"""
-    args = args or ""
     check_pyright(ctx, args)
 
 
 @task(optional=["args"], help={"args": "black additional arguments"})
-def fix_black(ctx: Context, args: str | None = ""):
+def fix_black(ctx: Context, args: str = "."):
     """fix black formatting"""
-    args = args or "."
     ctx.run(f"black {args}", pty=use_pty)
 
 
 @task(optional=["args"], help={"args": "ruff additional arguments"})
-def fix_ruff(ctx: Context, args: str | None = ""):
+def fix_ruff(ctx: Context, args: str = "."):
     """fix all ruff rules"""
-    args = args or "."
     ctx.run(f"ruff --fix {args}", pty=use_pty)
 
 
 @task(
-    optional=["args"],
-    help={"args": "linting (fix mode) tools (black, ruff) additional arguments"},
+    optional=["black_args", "ruff_args"],
+    help={
+        "black_args": "linting (fix mode) black arguments",
+        "ruff_args": "linting (fix mode) ruff arguments",
+    },
 )
-def fixall(ctx: Context, args: str | None = ""):
-    """fix everything automatically"""
-    args = args or "."
-    fix_black(ctx, args)
-    fix_ruff(ctx, args)
-    lintall(ctx, args)
+def fixall(ctx: Context, black_args: str = ".", ruff_args: str = "."):
+    """Fix everything automatically"""
+    fix_black(ctx, black_args)
+    fix_ruff(ctx, ruff_args)
+    lintall(ctx, black_args=black_args, ruff_args=ruff_args)
