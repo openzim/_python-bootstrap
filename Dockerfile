@@ -8,17 +8,14 @@ RUN apt-get update \
       locales-all \
  && rm -rf /var/lib/apt/lists/* \
  && python -m pip install --no-cache-dir -U \
-      pip \
-      pip-tools
+      pip
 
 # Copy pyproject.toml and its dependencies
 COPY pyproject.toml README.md /src/
 COPY src/great_project/__about__.py /src/src/great_project/__about__.py
 
 # Install Python dependencies
-RUN pip-compile --strip-extras -o requirements.txt /src/pyproject.toml \
- && pip install --no-cache-dir -r requirements.txt \
- && rm requirements.txt
+RUN pip install --no-cache-dir /src
 
 # Copy code + associated artifacts
 COPY src /src/src
