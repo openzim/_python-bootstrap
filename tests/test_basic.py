@@ -13,5 +13,5 @@ def test_version():
 def test_compute():
     assert compute(1, 2) == 3
     with pytest.raises(TypeError):
-        compute(1.0, 2)  # pyright: ignore [reportGeneralTypeIssues]
+        compute(1.0, 2)  # pyright: ignore [reportArgumentType]
     assert entrypoint() is None
