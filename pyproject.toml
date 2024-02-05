@@ -1,26 +1,19 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-openzim"]
 build-backend = "hatchling.build"
 
 [project]
 name = "great-project"
-authors = [
-  { name = "Kiwix", email = "dev@kiwix.org" },
-]
-keywords = ["some"]
-requires-python = ">=3.10"
+requires-python = ">=3.12,<3.13"
 description = "A Great Project"
 readme = "README.md"
-license = {text = "GPL-3.0-or-later"}
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.11",
-    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
-]
 dependencies = [
     "requests==2.31.0",
 ]
-dynamic = ["version"]
+dynamic = ["authors", "classifiers", "keywords", "license", "version", "urls"]
+
+[tool.hatch.metadata.hooks.openzim-metadata]
+additional-keywords = ["some"]
 
 [project.optional-dependencies]
 scripts = [
@@ -45,10 +38,6 @@ dev = [
   "great-project[test]",
   "great-project[check]",
 ]
-
-[project.urls]
-Homepage = "https://github.com/openzim/great-project"
-Donate = "https://www.kiwix.org/en/support-us/"
 
 [project.scripts]
 great-binary = "great_project:entrypoint"
