@@ -1,0 +1,3 @@
+- `QA.yml` runs linting and static type checks (always)
+- `Tests.yml` runs the tests on all supported Python versions. On latest version, uploads coverage to codecov. Also builds the package (to ensure build is not broken)
+- `Publish.yaml` builds the packages and uploads them to PyPI
