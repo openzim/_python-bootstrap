@@ -1,4 +1,4 @@
-Please check our [[Policy]] first.
+If you've not already read it, please check our [Policy](./Policy.md) first.
 
 ## Using Hatch
 

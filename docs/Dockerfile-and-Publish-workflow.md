@@ -8,8 +8,8 @@ You will find in this page our guidelines to:
 
 - Debian-based images using the current [debian stable](https://www.debian.org/releases/) release (e.g. bookworm as of July 2023)
 - `slim` variant whenever it is sufficient
-- `alpine` variant only for highly constrained space environment (Offspot apps for instance). See [drawbacks](https://github.com/tiangolo/uvicorn-gunicorn-docker#-alpine-python-warning for explanations)
-- July 2023, latest Python stable is `3.11` and Debian stable is `bookworm` hence `python:3.11-slim-bookworm` or `python:3.11-bookworm`
+- `alpine` variant only for highly constrained space environment (Offspot apps for instance). See [drawbacks](https://github.com/tiangolo/uvicorn-gunicorn-docker#-alpine-python-warning) for explanations
+- October 2023, latest Python stable is `3.12` and Debian stable is `bookworm` hence `python:3.12-slim-bookworm` or `python:3.12-bookworm`
 
 ## RUN commands
 
