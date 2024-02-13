@@ -20,4 +20,8 @@ Simpler suggestions are expected as [Pull Request](https://github.com/openzim/_p
 
 ## Versioning
 
-We will most likely tag have _versions_ as tags at some point in time but we are yet to achieve an initial one.
+The Python policy / bootstrap / convention is versioned in the main CHANGELOG.md.
+
+Tags are used to point to the various versions.
+
+Project must specify in their README.md the version they currently support to track required changes.

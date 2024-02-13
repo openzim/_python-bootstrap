@@ -31,4 +31,6 @@ You'd want to install it in a dedicated virtual-environment (`python3 -m venv so
 ❯ pip install -e .
 ```
 
-Great-project adheres to openZIM's [Contribution Guidelines](https://github.com/openzim/overview/wiki/Contributing)
+Great-project adheres to openZIM's [Contribution Guidelines](https://github.com/openzim/overview/wiki/Contributing).
+
+Great-project has implemented openZIM's [Python bootstrap, conventions and policies](https://github.com/openzim/_python-bootstrap/docs/Policy.md) **v0.2.0**.

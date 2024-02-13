@@ -10,3 +10,4 @@ README (markdown format) should at least contain (in this order):
   - Python Version
 - Installation/usage instructions
 - Contribution guidelines (or at least a link to [Contributing](https://github.com/openzim/overview/wiki/Contributing))
+- A reference to the fact the project adheres to this boostrap conventions and current conventions version in place
