@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Tests workflow now fails CI if the codecov upload step fails
+
 ### Fixed
 
 - Coverage invoke task now generating coverage.xml which codecov will upload
