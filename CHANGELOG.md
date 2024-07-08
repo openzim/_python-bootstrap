@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade CI to use ubuntu-24.04
 - Upgrade CI actions to use latest version
 
+## Fixed
+
+- Fixed `pyproject.toml` versions used in pytest, black, ruff and pyright
+
 ## [1.0.2] - 2024-06-10
 
 ### Changed
