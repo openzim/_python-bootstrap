@@ -46,6 +46,7 @@ The key part is the symlink to `.venv` so that LSP-pyright and other tool can au
   - at least each supported and released minor versions (i.e. security + bugfix on https://devguide.python.org/versions/)
   - installed with `pyenv install x.y.z`
   - all supported and released minor versions are set in `/Users/<username>/.python-version` (i.e. available when looking for a version with python, python3, python3.x, ...)
+- When doing some JS, you obviously need a Node.JS as well 
 - [hatch](https://pypi.org/project/hatch/) installed globally
 - [Visual Studio Code](https://github.com/microsoft/vscode) with following extensions (more or less related to Python development)
   - Black Formater (Microsoft)
@@ -62,6 +63,8 @@ The key part is the symlink to `.venv` so that LSP-pyright and other tool can au
   - Ruff (Astral Software)
   - Volar (Vue)
   - YAML (Red Hat)
+  - Prettier (Prettier)
+  - ESLint (Microsoft)
 
 Hatch is configured with an additional section in `config.toml` (configuration file is located in `~/Library/Application Support/hatch`, see https://hatch.pypa.io/latest/config/hatch/, correct file is shown by `hatch status` in any case).
 ```
@@ -74,15 +77,35 @@ This additional Hatch config section ensures that all virtual environments (the 
 On every project, create a local `.vscode/settings.json` to automatically format your code (adjust `typeCheckingMode` depending on your project):
 ``` json
 {
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  "python.analysis.typeCheckingMode": "strict",
+  "eslint.validate": ["javascript", "typescript", "vue"],
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+  "editor.rulers": [88],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always",
+    "source.formatDocument": "always"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
+```
 
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.black-formatter",
-        "editor.formatOnSave": true,
-        "editor.codeActionsOnSave": {
-            "source.organizeImports": true
-        },
-    },
-    "python.analysis.typeCheckingMode": "basic",
+For some projects, you might need to add extra configuration to specify where Python modules can be found:
+
+```json
+{
+  ...
+  "python.analysis.extraPaths": [
+    "scraper/src",
+    "scraper/.hatch/libretexts2zim/lib/python3.12/site-packages"
+  ],
+  ...
 }
 ```
 
