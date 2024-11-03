@@ -7,6 +7,7 @@ Leverages great things to achieve great results
 [![codecov](https://codecov.io/gh/openzim/_python-bootstrap/branch/main/graph/badge.svg)](https://codecov.io/gh/openzim/_python-bootstrap)
 [![PyPI version shields.io](https://img.shields.io/pypi/v/great_project.svg)](https://pypi.org/project/great_project/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/great_project.svg)](https://pypi.org/project/great_project)
+[![Docker](https://ghcr-badge.egpl.dev/openzim/_python-bootstrap/latest_tag?label=docker)](https://ghcr.io/openzim/_python-bootstrap)
 
 ## Usage
 

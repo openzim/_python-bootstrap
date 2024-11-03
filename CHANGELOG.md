@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Upgrade Docker image to use python:3.12-slim-bookworm
+- Add Docker badge
 
 ## [1.0.3] - 2024-07-08
 
