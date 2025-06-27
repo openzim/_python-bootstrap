@@ -1,4 +1,6 @@
-name: Tests
+# This workflow runs everything which is mostly harmless to run on an external PR
+# because it does not requires secrets / access to external systems
+name: Public Tests
 
 on:
   pull_request:
@@ -28,15 +30,31 @@ jobs:
           pip install -U pip
           pip install -e .[test,scripts]
 
-      - name: Run the tests
-        run: inv coverage --args "-vvv"
-
-      - name: Upload coverage report to codecov
+      - name: Run the tests with coverage
         if: matrix.python == '3.12'
-        uses: codecov/codecov-action@v4
+        run: |
+          inv test-unit-cov --args "-vvv"
+          mkdir -p unit-tests
+          cp .coverage* unit-tests
+
+      - name: Run the tests without coverage
+        if: matrix.python != '3.12'
+        run: inv test-unit --args "-vvv"
+
+      - name: Upload coverage results for unit tests
+        if: matrix.python == '3.12'
+        uses: actions/upload-artifact@v4
         with:
-          fail_ci_if_error: true
-          token: ${{ secrets.CODECOV_TOKEN }}
+          name: coverage-unit
+          path: unit-tests/
+          retention-days: 1
+
+      # - name: Upload coverage report to codecov
+      #   if: matrix.python == '3.12'
+      #   uses: codecov/codecov-action@v4
+      #   with:
+      #     fail_ci_if_error: true
+      #     token: ${{ secrets.CODECOV_TOKEN }}
 
   build_python:
     runs-on: ubuntu-24.04

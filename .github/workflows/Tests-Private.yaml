@@ -1,0 +1,50 @@
+# This workflow runs everything which is requiring secrets / access to external systems
+# It requires manual approval by a maintainer for external commiters and uses
+# It uses a "hack" to still execute within PR codebase despite secrets being exposed
+name: Private Tests
+
+on:
+  pull_request:
+  pull_request_target:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-tests:
+    strategy:
+      matrix:
+        os: [ubuntu-24.04]
+        python: ["3.11", "3.12"]
+    runs-on: ${{ matrix.os }}
+    environment: 'private'
+    env:
+      A_SECRET_VALUE_FROM_ENV: ${{ secrets.A_SECRET_VALUE_FROM_ENV }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # /!\ important: this checks out code from the HEAD of the PR instead of the main branch (for pull_request_target)
+          ref: ${{ github.event.pull_request.head.sha || github.ref }}
+
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          architecture: x64
+
+      - name: Install dependencies (and project)
+        run: |
+          pip install -U pip
+          pip install -e .[test,scripts]
+
+      - name: Run the tests
+        run: inv coverage-integration --args "-vvv"
+
+      - name: Upload coverage results for integration tests
+        if: matrix.python == '3.12'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-integration
+          path: coverage.xml
+          retention-days: 1
