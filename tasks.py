@@ -14,9 +14,33 @@ def test(ctx: Context, args: str = ""):
 
 
 @task(optional=["args"], help={"args": "pytest additional arguments"})
+def test_unit(ctx: Context, args: str = ""):
+    """run unit tests (without coverage)"""
+    ctx.run(f"pytest tests/unit {args}", pty=use_pty)
+
+
+@task(optional=["args"], help={"args": "pytest additional arguments"})
+def test_integration(ctx: Context, args: str = ""):
+    """run integration tests (without coverage)"""
+    ctx.run(f"pytest tests/integration {args}", pty=use_pty)
+
+
+@task(optional=["args"], help={"args": "pytest additional arguments"})
 def test_cov(ctx: Context, args: str = ""):
     """run test vith coverage"""
     ctx.run(f"coverage run -m pytest {args}", pty=use_pty)
+
+
+@task(optional=["args"], help={"args": "pytest additional arguments"})
+def test_unit_cov(ctx: Context, args: str = ""):
+    """run test vith coverage"""
+    ctx.run(f"coverage run -m pytest tests/unit {args}", pty=use_pty)
+
+
+@task(optional=["args"], help={"args": "pytest additional arguments"})
+def test_integration_cov(ctx: Context, args: str = ""):
+    """run test vith coverage"""
+    ctx.run(f"coverage run -m pytest tests/integration {args}", pty=use_pty)
 
 
 @task(optional=["html"], help={"html": "flag to export html report"})
@@ -39,6 +63,32 @@ def report_cov(ctx: Context, *, html: bool = False):
 def coverage(ctx: Context, args: str = "", *, html: bool = False):
     """run tests and report coverage"""
     test_cov(ctx, args=args)
+    report_cov(ctx, html=html)
+
+
+@task(
+    optional=["args", "html"],
+    help={
+        "args": "pytest additional arguments",
+        "html": "flag to export html report",
+    },
+)
+def coverage_unit(ctx: Context, args: str = "", *, html: bool = False):
+    """run unit tests and report coverage"""
+    test_unit_cov(ctx, args=args)
+    report_cov(ctx, html=html)
+
+
+@task(
+    optional=["args", "html"],
+    help={
+        "args": "pytest additional arguments",
+        "html": "flag to export html report",
+    },
+)
+def coverage_integration(ctx: Context, args: str = "", *, html: bool = False):
+    """run integration tests and report coverage"""
+    test_integration_cov(ctx, args=args)
     report_cov(ctx, html=html)
 
 
