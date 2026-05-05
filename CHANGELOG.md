@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Remove `black` from `pyproject.toml` and `tasks.py`
+- Upgrade `ruff` to `0.15.12`
+- Merge `check` and `lint` features into `qa`
+- Remove `lint-black`, `lint-ruff`, `fix-black`, `fix-ruff`, `lintall`, `fixall`, and
+  `check-pyright` invoke tasks
+- Add new invoke tasks: `check-lint`, `check-format`, `check-type`, `check-all`,
+  `fix-format`, `fix-lint` and `fix-all`
+
 ### Changed
 
 - Upgrade Docker image to use python:3.12-slim-bookworm
@@ -86,7 +94,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fix few invoke task arguments and help
 
-
 ## [0.1.7] - 2023-08-04
 
 ### Changed
@@ -141,8 +148,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Add the scripts to lint's features, otherwise we can use the hatch run lint:*
-
+- Add the scripts to lint's features, otherwise we can use the hatch run lint:\*
 
 ## [0.1.0] - 2023-06-22
 

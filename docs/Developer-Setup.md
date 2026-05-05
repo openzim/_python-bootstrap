@@ -49,7 +49,6 @@ The key part is the symlink to `.venv` so that LSP-pyright and other tool can au
 - When doing some JS, you obviously need a Node.JS as well 
 - [hatch](https://pypi.org/project/hatch/) installed globally
 - [Visual Studio Code](https://github.com/microsoft/vscode) with following extensions (more or less related to Python development)
-  - Black Formater (Microsoft)
   - Dev Containers (Microsoft)
   - Docker (Microsoft)
   - Excalidraw (pomdtr)
@@ -77,12 +76,6 @@ This additional Hatch config section ensures that all virtual environments (the 
 On every project, create a local `.vscode/settings.json` to automatically format your code (adjust `typeCheckingMode` depending on your project):
 ``` json
 {
-  "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter",
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": "explicit"
-    }
-  },
   "python.analysis.typeCheckingMode": "strict",
   "eslint.validate": ["javascript", "typescript", "vue"],
   "eslint.workingDirectories": [{ "mode": "auto" }],
