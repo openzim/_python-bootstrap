@@ -13,14 +13,12 @@ If you've not already read it, please check our [Policy](./Policy.md) first.
 ❯ hatch env show
 
 # linting, testing, coverage, checking
-❯ hatch run lint:all
-❯ hatch run lint:fixall
+❯ hatch run qa:check-all
+❯ hatch run qa:fix-all
 # run tests on all matrixed' envs
 ❯ hatch run test:run
 # run tests in a single matrixed' env
 ❯ hatch env run -e test -i py=3.11 coverage
-# run static type checks
-❯ hatch env run check:all
 
 # building packages
 ❯ hatch build
@@ -38,12 +36,13 @@ If you've not already read it, please check our [Policy](./Policy.md) first.
 # scripts discovery
 ❯ inv -l
 
-# linting, testing, coverage, static type checks
-❯ inv lintall
-❯ inv fixall
+# check linting, formatting and static type checks
+❯ inv check-all
+# fix everything automatically
+❯ inv fix-all
+# run tests
 ❯ inv test
 ❯ inv coverage
-❯ inv checkall
 
 # building packages
 ❯ pip install build

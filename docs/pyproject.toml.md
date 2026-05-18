@@ -20,12 +20,12 @@ Version must be dynamic and set once in code. `module.__about__` usually.
 
 ### Linting
 
-- Black (latest available version)
+- Ruff (latest available version)
 - Ruff for import sorting (isort-like) and many other checks
 - Dedicated hatch environment
-- Black and ruff configuration so those works without hatch as well
-- Scripts for just black and just ruff checking
-- Scripts for black fixing and ruf fixing (accepts params)
+- Ruff configuration so those works without hatch as well
+- Scripts for just ruff checking
+- Scripts for ruff fixing (accepts params)
 - Scripts for global checking and fixing
 - Sample ruff configuration
 
