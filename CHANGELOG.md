@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Pyright ignores `.hatch/**` and git ignores `.hatch/`
+- `check_all`/`fix_all` no longer forward the `.` path argument meant for `ruff`
+  into `pyright` as well, which overrode its `[tool.pyright] include` scoping and
+  could report spurious errors on any directory outside of it (#60)
 
 ## [2.0.0] - 2026-05-26
 
