@@ -202,7 +202,7 @@ exclude_lines = [
 
 [tool.pyright]
 include = ["src", "tests", "tasks.py"]
-exclude = [".env/**", ".venv/**"]
+exclude = [".env/**", ".venv/**", ".hatch/**"]
 extraPaths = ["src"]
 pythonVersion = "3.12"
 typeCheckingMode="strict"
